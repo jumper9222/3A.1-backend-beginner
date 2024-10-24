@@ -13,8 +13,6 @@ export default function SignInModal({ show, handleClose }) {
     const [password, setPassword] = useState('');
     const [loginFailed, setLoginFailed] = useState(null);
 
-    const navigate = useNavigate();
-
     const loginHandler = async (e) => {
         e.preventDefault();
         try {
@@ -23,7 +21,6 @@ export default function SignInModal({ show, handleClose }) {
                 console.log("login successful")
                 console.log(res.data)
                 setAuthToken(res.data.token)
-
             }
         } catch (error) {
             console.error("Error logging in:", error);
