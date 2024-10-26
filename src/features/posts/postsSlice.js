@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-export const BASE_URL = "hhttps://blog-server-mocha-iota.vercel.app/"
+export const BASE_URL = "hhttps://blog-server-mocha-iota.vercel.app"
 
 export const fetchPostsByUser = createAsyncThunk(
     "posts/fetchPostsByUser",
