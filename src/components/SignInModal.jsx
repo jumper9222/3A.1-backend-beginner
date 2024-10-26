@@ -7,7 +7,7 @@ import useLocalStorage from 'use-local-storage';
 export default function SignInModal({ show, handleClose }) {
     const [authToken, setAuthToken] = useLocalStorage("authToken", "")
 
-    const url = "https://blog-auth-cknjsgrdx-jumper9222s-projects.vercel.app/?vercelToolbarCode=WuT2RxjnYJmbp7A"
+    const url = "https://blog-auth-6g9wgp9nb-jumper9222s-projects.vercel.app/"
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
