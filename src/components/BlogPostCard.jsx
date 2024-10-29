@@ -36,7 +36,6 @@ export default function BlogPostCard({ post, editMode }) {
     }
 
     const toggleDelete = (e) => {
-        e.stopPropagation();
         setShowDelete(!showDelete)
     }
 
@@ -71,7 +70,7 @@ export default function BlogPostCard({ post, editMode }) {
                 <Card.Body>
                     <Card.Title>{post.title}</Card.Title>
                     {post.subtitle && <Card.Subtitle className="mb-2 text-muted">{post.subtitle}</Card.Subtitle>}
-                    <Card.Text>{post.content}...<a onClick={handleShowModal}>read more</a></Card.Text>
+                    <Card.Text>{post.content}</Card.Text>
                 </Card.Body>
             </Card>
             {!editMode

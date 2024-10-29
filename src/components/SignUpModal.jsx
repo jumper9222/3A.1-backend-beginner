@@ -3,7 +3,7 @@ import { Modal, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 export default function SignUpModal({ show, handleClose }) {
-    const url = "http://localhost:3001"
+    const url = "https://blog-auth-app.vercel.app"
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

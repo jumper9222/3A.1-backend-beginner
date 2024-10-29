@@ -1,12 +1,25 @@
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
+import { handleLogout } from "../features/posts/postsSlice";
+import useLocalStorage from "use-local-storage";
+import { useEffect } from "react";
 
 export default function HomeNavbar() {
+    const [authToken, setAuthToken] = useLocalStorage("authToken", "")
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const handleLogout = () => {
-        localStorage.removeItem("authToken")
-        navigate('/')
+    useEffect(() => {
+        if (authToken === "") {
+            navigate('/')
+        }
+    }, [navigate, authToken])
+
+    const handleLogoutClick = async (e) => {
+        e.preventDefault();
+        dispatch(handleLogout());
+        navigate('/');
     }
 
     return (
@@ -23,7 +36,7 @@ export default function HomeNavbar() {
                     </Navbar.Collapse>
                     <Button
                         variant="outline-danger"
-                        onClick={handleLogout}
+                        onClick={handleLogoutClick}
                     >
                         Logout
                     </Button>

@@ -59,31 +59,54 @@ export const fetchPost = createAsyncThunk(
 
 const postsSlice = createSlice({
     name: "posts",
-    initialState: { posts: [], loading: true },
+    initialState: { posts: [], loading: true, saveLoading: false, editLoading: false },
     reducers: {
-
+        handleLogout: (state) => {
+            localStorage.setItem("authToken", "")
+            state.posts = [];
+        },
     },
     extraReducers: (builder) => {
+        builder.addCase(fetchPostsByUser.pending, (state, action) => {
+            state.loading = true;
+        });
         builder.addCase(fetchPostsByUser.fulfilled, (state, action) => {
             state.posts = action.payload;
             state.loading = false;
             console.log(state.posts)
         });
+        builder.addCase(fetchPost.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(fetchPost.fulfilled, (state, action) => {
+            state.loading = false;
+        });
+        builder.addCase(savePost.pending, (state, action) => {
+            state.saveLoading = true;
+        });
         builder.addCase(savePost.fulfilled, (state, action) => {
             state.posts = [...state.posts, action.payload];
+            state.saveLoading = false;
         });
         builder.addCase(deletePost.fulfilled, (state, action) => {
-            state.posts.filter((post) => post.post_id !== action.payload.post_id)
+            console.log(action.payload)
+            state.posts = state.posts.filter((post) => post.post_id !== action.payload.post.post_id)
         });
+        builder.addCase(editPost.pending, (state, action) => {
+            state.editLoading = true;
+        })
         builder.addCase(editPost.fulfilled, (state, action) => {
             state.posts = state.posts.map((post) => {
-                if (post.post_id === action.payload.post_id) {
+                if (post.post_id === action.payload.post.post_id) {
                     return action.payload;
+                } else {
+                    return post
                 }
-                return post
+                state.editLoading = false;
             })
         })
     }
 })
 
+export const { handleLogout } = postsSlice.actions;
 export default postsSlice.reducer;
