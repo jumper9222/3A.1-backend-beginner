@@ -1,7 +1,7 @@
-import { Button, Card, Modal } from "react-bootstrap";
+import { Button, Card, Modal, Placeholder } from "react-bootstrap";
 import BlogPostModal from "./BlogPostModal";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { createContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost, fetchPostsByUser } from "../features/posts/postsSlice";
 import { jwtDecode } from "jwt-decode";
 import EditPostModal from "./EditPostModal";
@@ -40,11 +40,8 @@ export default function BlogPostCard({ post, editMode }) {
     }
 
     const handleDelete = () => {
-        const userId = jwtDecode(localStorage.getItem("authToken")).id
-        console.log(post, userId)
         dispatch(deletePost(post.post_id));
         toggleDelete();
-        dispatch(fetchPostsByUser(userId))
     }
 
     const handleEditClick = () => {

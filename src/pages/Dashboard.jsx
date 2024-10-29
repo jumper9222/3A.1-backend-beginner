@@ -14,15 +14,15 @@ export default function Dashboard() {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.posts.loading);
     const saveLoading = useSelector((state) => state.posts.saveLoading);
+    const posts = useSelector((state) => state.posts.posts)
 
     const [authToken, setAuthToken] = useLocalStorage("authToken", "")
 
     const [editMode, setEditMode] = useState(false);
+
     const toggleEditMode = () => {
         setEditMode(!editMode)
     };
-
-    const posts = useSelector((state) => state.posts.posts)
 
     useEffect(() => {
 
